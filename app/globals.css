@@ -1,0 +1,217 @@
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+:root {
+  --brand-navy: #001d57;
+  --brand-blue: #0278e2;
+  --brand-blue-hover: #0062b8;
+  --brand-blue-pressed: #004b91;
+  --brand-link: #005ba8;
+  --brand-gold: #ba892f;
+  --brand-gold-text: #73500f;
+  --navy: var(--brand-navy);
+  --navy-deep: #00143b;
+  --navy-soft: #103d78;
+  --gold: var(--brand-gold);
+  --gold-light: #f5ebd6;
+  --ink: #17243a;
+  --muted: #64748b;
+  --paper: #f7f8fa;
+  --line: #e3e8ef;
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(0, 91, 168, 0.55);
+  outline-offset: 2px;
+}
+
+.page-shell {
+  min-height: calc(100vh - 220px);
+}
+
+.section-wrap {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  color: var(--brand-gold-text);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.serif-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.035em;
+}
+
+.hero-grid {
+  background:
+    radial-gradient(ellipse at 87% 14%, rgba(2, 120, 226, 0.24), transparent 34%),
+    linear-gradient(125deg, #00143b 0%, #103d78 56%, #001d57 100%);
+}
+
+.brand-button {
+  color: #fff;
+  background-image: linear-gradient(
+    110deg,
+    var(--brand-blue-hover) 0%,
+    var(--brand-navy) 100%
+  );
+  background-position: left center;
+  background-size: 200% 100%;
+  transition:
+    background-position 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.brand-link {
+  color: var(--brand-link);
+  transition: color 150ms ease;
+}
+
+.brand-link:hover {
+  color: var(--brand-blue-hover);
+}
+
+.brand-button:hover {
+  background-position: right center;
+  box-shadow: 0 8px 20px rgba(0, 29, 87, 0.2);
+}
+
+.brand-button:active {
+  background-image: linear-gradient(
+    110deg,
+    var(--brand-blue-pressed) 0%,
+    #00143b 100%
+  );
+}
+
+.brand-logo-link img {
+  transition:
+    filter 150ms ease,
+    transform 150ms ease;
+}
+
+.loading-mark {
+  animation: logo-breathe 3s ease-in-out infinite;
+}
+
+@keyframes logo-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.demo-watermark {
+  position: fixed;
+  z-index: 80;
+  right: 12px;
+  bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(0, 29, 87, 0.96);
+  color: #fff;
+  padding: 8px 13px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 24px rgba(7, 27, 52, 0.18);
+}
+
+.map-marker {
+  display: grid;
+  width: 23px;
+  height: 23px;
+  place-items: center;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(7, 27, 52, 0.34);
+}
+
+.map-marker-approved {
+  background: #23876a;
+}
+
+.map-marker-review {
+  background: var(--gold);
+}
+
+.leaflet-container {
+  z-index: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.demo-map .leaflet-bottom.leaflet-right {
+  right: auto;
+  left: 0;
+}
+
+@media (max-width: 640px) {
+  .section-wrap {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .demo-watermark {
+    right: 8px;
+    bottom: 8px;
+    padding: 7px 10px;
+    font-size: 0.64rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-mark {
+    animation: none;
+    opacity: 1;
+  }
+
+  .brand-button,
+  .brand-logo-link img {
+    transition: none;
+  }
+}
