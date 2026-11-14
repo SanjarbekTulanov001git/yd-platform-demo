@@ -20,7 +20,7 @@ export function AccessGate({
         <div className="mx-auto max-w-xl rounded-3xl border border-rose-200 bg-white p-8 text-center shadow-sm">
           <BrandMark className="mx-auto h-9" />
           <p className="eyebrow mt-6">Tanlangan rol</p>
-          <h1 className="mt-2 text-3xl font-black text-[var(--navy)]">
+          <h1 className="fluid-title mt-2 font-black text-[var(--navy)]">
             Ruxsat yo‘q
           </h1>
           <p className="mt-4 leading-7 text-slate-600">

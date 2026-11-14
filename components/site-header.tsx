@@ -57,26 +57,25 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="section-wrap">
-        <div className="flex min-h-[76px] items-center justify-between gap-5">
+        <div className="flex min-h-14 items-center justify-between gap-3 lg:min-h-[76px] lg:gap-5">
           <Link
             href="/"
             aria-label="O'zbekiston Yoshlar Diplomatiya Markazi bosh sahifasi"
             className="brand-logo-link group flex min-w-0 shrink-0 items-center"
           >
-            <span className="hidden h-[54px] md:block">
+            <span className="hidden h-[54px] lg:block">
               <BrandLogo
                 className="h-full w-auto transition duration-150 group-hover:scale-[1.025] group-hover:brightness-105 motion-reduce:transition-none"
-                priority
               />
             </span>
-            <span className="h-11 md:hidden">
-              <BrandMark className="h-full w-auto transition duration-150 group-hover:scale-[1.025] group-hover:brightness-105 motion-reduce:transition-none" />
+            <span className="block h-10 w-[72px] shrink-0 lg:hidden">
+              <BrandMark className="brand-mark-image transition duration-150 group-hover:scale-[1.025] group-hover:brightness-105 motion-reduce:transition-none" />
             </span>
           </Link>
 
           <button
             type="button"
-            className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 md:hidden"
+            className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-700 lg:hidden"
             aria-expanded={menuOpen}
             aria-label="Menyuni ochish yoki yopish"
             onClick={() => setMenuOpen((open) => !open)}
@@ -84,7 +83,7 @@ export function SiteHeader() {
             {menuOpen ? "Yopish" : "Menyu"}
           </button>
 
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Asosiy menyu">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Asosiy menyu">
             {links.map((link) => (
               <Link
                 className="text-xs font-semibold text-slate-600 transition hover:text-[var(--brand-link)]"
@@ -114,7 +113,7 @@ export function SiteHeader() {
         </div>
         {menuOpen && (
           <nav
-            className="grid gap-1 border-t border-slate-100 py-3 md:hidden"
+            className="grid gap-1 border-t border-slate-100 py-3 lg:hidden"
             aria-label="Asosiy menyu"
           >
             {links.map((link) => (

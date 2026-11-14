@@ -79,7 +79,7 @@ export default function ApplyPage() {
         </Link>
         <div className="mx-auto mt-7 max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-9">
           <p className="eyebrow">Namuna ariza shakli</p>
-          <h1 className="mt-3 text-2xl font-bold text-[var(--navy)] sm:text-3xl">
+          <h1 className="fluid-title mt-3 font-bold text-[var(--navy)]">
             {program.name}
           </h1>
           <p className="mt-3 leading-6 text-slate-600">

@@ -31,26 +31,26 @@ export default function HomePage() {
               className="mb-7 inline-flex rounded-2xl p-1 transition hover:brightness-105 motion-reduce:transition-none"
               href="/"
             >
-              <BrandLogo className="h-12 w-auto" withPlate />
+              <BrandLogo className="hero-brand-logo" withPlate />
             </Link>
             <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--gold)]">
               {text.heroEyebrow}
             </p>
-            <h1 className="serif-heading mt-5 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="serif-heading hero-heading mt-5 max-w-2xl font-bold">
               {text.heroTitle}
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-white/75 sm:text-lg">
+            <p className="hero-description mt-6 max-w-xl leading-7 text-white/75">
               {text.heroDescription}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-9 grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
               <Link
-                className="brand-button rounded-xl px-5 py-3 text-sm font-bold"
+                className="brand-button w-full rounded-xl px-5 py-3 text-center text-sm font-bold sm:w-auto"
                 href="/departments"
               >
                 {text.exploreDepartments}
               </Link>
               <Link
-                className="rounded-xl border border-white/30 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+                className="w-full rounded-xl border border-white/30 px-5 py-3 text-center text-sm font-bold text-white transition hover:bg-white/10 sm:w-auto"
                 href="/programs"
               >
                 {text.explorePrograms}
