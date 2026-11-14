@@ -1,6 +1,7 @@
 "use client";
 
 import { AccessGate } from "@/components/access-gate";
+import { OrnamentDivider } from "@/components/ornaments";
 
 const demoRoles = [
   ["Ommaviy", "Ochiq sahifalar"],
@@ -20,6 +21,7 @@ export default function AdminPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Tizim boshqaruvi
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Admin namunada foydalanuvchi roli va demo bo‘limlarini ko‘radi, ammo
           ariza va tarjimai hol ma’lumotlariga odatiy kirish huquqiga ega emas.

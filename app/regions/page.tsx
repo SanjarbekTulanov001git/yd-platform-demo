@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { AccessGate } from "@/components/access-gate";
-import { BrandMark } from "@/components/brand-logo";
 import { MapView } from "@/components/map/map-view";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
 import { demoApi, demoRoleProfiles } from "@/lib/api";
 
 export default function RegionsPage() {
@@ -33,6 +33,7 @@ export default function RegionsPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Hududlar va tashriflar
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Xarita va muassasalar nomuna ma’lumotlari bitta to‘plamdan olinadi.
           Hududni almashtirish uchun alohida tizim kerak emas.
@@ -180,10 +181,9 @@ export default function RegionsPage() {
                 );
               })}
               {!visits.length && (
-                <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-sm text-slate-500">
-                  <BrandMark className="mb-3 h-7" />
+                <OrnamentalEmptyState className="text-sm text-slate-500">
                   <p>Tanlangan hududda tashrif namunasi yo‘q.</p>
-                </div>
+                </OrnamentalEmptyState>
               )}
             </div>
           </section>

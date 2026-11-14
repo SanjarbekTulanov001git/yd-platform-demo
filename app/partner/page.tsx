@@ -1,9 +1,9 @@
 "use client";
 
 import { AccessGate } from "@/components/access-gate";
-import { BrandMark } from "@/components/brand-logo";
 import { useDemo } from "@/components/demo-provider";
 import { demoApi } from "@/lib/api";
+import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
 
 export default function PartnerPage() {
   const { role } = useDemo();
@@ -17,6 +17,7 @@ export default function PartnerPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Hamkorlik ma’lumotlari
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Bu ekran hamkorning namuna loyihalarini ko‘rsatadi. U haqiqiy tashkilot
           yoki hisob bilan bog‘lanmagan.
@@ -43,10 +44,9 @@ export default function PartnerPage() {
             </article>
           ))}
           {!items.length && (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-sm text-slate-500">
-              <BrandMark className="mb-3 h-7" />
+            <OrnamentalEmptyState className="text-sm text-slate-500">
               <p>Bu namuna hisobga biriktirilgan hamkorlik yo‘q.</p>
-            </div>
+            </OrnamentalEmptyState>
           )}
         </div>
         {role === "partner" && (

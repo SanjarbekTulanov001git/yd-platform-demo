@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { DepartmentCard } from "@/components/department-card";
-import { PlaceholderArt } from "@/components/placeholder-art";
 import { ProgramCard } from "@/components/program-card";
 import { SectionHeading } from "@/components/section-heading";
+import { DiplomaticHeroArt, OrnamentDivider } from "@/components/ornaments";
 import { useDemo } from "@/components/demo-provider";
 import { demoApi } from "@/lib/api";
 import uz from "@/messages/uz/common";
@@ -39,6 +39,7 @@ export default function HomePage() {
             <h1 className="serif-heading hero-heading mt-5 max-w-2xl font-bold">
               {text.heroTitle}
             </h1>
+            <OrnamentDivider className="mt-4 max-w-xs text-[var(--gold)]" />
             <p className="hero-description mt-6 max-w-xl leading-7 text-white/75">
               {text.heroDescription}
             </p>
@@ -61,12 +62,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="relative">
-            <PlaceholderArt
-              title="Yoshlar, diplomatiya va xalqaro hamkorlik"
-              number="YD"
-              className="min-h-[330px] border-white/20 sm:min-h-[420px]"
-            />
-            <div className="absolute -bottom-5 -left-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 shadow-xl backdrop-blur sm:-left-7">
+            <DiplomaticHeroArt />
+            <div className="absolute -bottom-5 left-4 rounded-2xl border border-white/20 bg-white/10 px-5 py-4 shadow-xl backdrop-blur sm:left-6">
               <p className="text-xs font-semibold text-white/70">Yagona maydon</p>
               <p className="mt-1 text-sm font-extrabold text-white">
                 10 ta markaz yo‘nalishi

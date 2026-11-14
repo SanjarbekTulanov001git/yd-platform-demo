@@ -128,6 +128,234 @@ h2 {
     linear-gradient(125deg, #00143b 0%, #103d78 56%, #001d57 100%);
 }
 
+.ornament-divider {
+  display: block;
+  width: min(320px, 100%);
+  height: auto;
+  color: var(--brand-gold);
+}
+
+.ornament-star-frame {
+  position: relative;
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  place-items: center;
+  color: var(--brand-gold);
+}
+
+.ornament-star-frame-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ornament-star-frame-content {
+  position: relative;
+  z-index: 1;
+  color: var(--navy);
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.diplomatic-hero-art {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 420px;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(2, 120, 226, 0.18), transparent 58%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(0, 20, 59, 0.12));
+}
+
+.diplomatic-hero-pattern {
+  position: absolute;
+  z-index: 0;
+  top: -20%;
+  left: -16%;
+  width: 80%;
+  height: auto;
+  color: var(--brand-gold);
+  opacity: 0.06;
+}
+
+.diplomatic-belt {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: auto;
+  color: #fff;
+}
+
+.diplomatic-belt-top {
+  top: 0;
+}
+
+.diplomatic-belt-bottom {
+  right: 0;
+  bottom: 0;
+}
+
+.diplomatic-globe {
+  position: relative;
+  z-index: 1;
+  width: min(88%, 410px);
+  height: auto;
+  color: rgba(255, 255, 255, 0.26);
+}
+
+.globe-route {
+  stroke: var(--brand-blue);
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  stroke-linecap: round;
+  stroke-width: 2;
+  animation: globe-route-draw 2.4s ease-out forwards;
+}
+
+.globe-route-two {
+  animation-delay: 0.18s;
+}
+
+.globe-route-three {
+  animation-delay: 0.36s;
+}
+
+.globe-route-four {
+  animation-delay: 0.54s;
+}
+
+.diplomatic-orbit-star {
+  position: absolute;
+  z-index: 2;
+  top: 11%;
+  right: 4%;
+  width: 78px;
+  height: auto;
+  color: var(--brand-gold);
+  opacity: 0.78;
+  animation: girih-rotate 44s linear infinite;
+}
+
+.diplomatic-hero-vine {
+  position: absolute;
+  z-index: 0;
+  bottom: 8%;
+  left: 18%;
+  width: 58%;
+  height: auto;
+  color: var(--brand-gold);
+  opacity: 0.06;
+}
+
+.diplomatic-dove {
+  position: absolute;
+  z-index: 2;
+  top: 14%;
+  left: 12%;
+  width: 58px;
+  height: auto;
+  color: var(--brand-gold);
+}
+
+.diplomatic-olive {
+  position: absolute;
+  z-index: 2;
+  right: 3%;
+  bottom: 9%;
+  width: 120px;
+  height: auto;
+  color: var(--brand-blue);
+  opacity: 0.78;
+}
+
+.diplomatic-corner {
+  position: absolute;
+  z-index: 2;
+  bottom: 8%;
+  left: 5%;
+  width: 62px;
+  height: auto;
+  color: var(--brand-gold);
+  opacity: 0.64;
+}
+
+.diplomatic-hero-caption {
+  position: absolute;
+  z-index: 3;
+  bottom: 18px;
+  left: 50%;
+  max-width: calc(100% - 32px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.footer-ikat {
+  display: block;
+  width: 100%;
+  height: 28px;
+  color: var(--brand-blue);
+  opacity: 0.72;
+}
+
+.ornamental-empty {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px dashed var(--line);
+  border-radius: 1.25rem;
+  background: #fff;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.ornamental-empty-pattern {
+  position: absolute;
+  z-index: 0;
+  top: -30px;
+  right: -24px;
+  width: 150px;
+  height: auto;
+  color: var(--brand-blue);
+  opacity: 0.06;
+}
+
+.ornamental-empty > :not(.ornamental-empty-pattern) {
+  position: relative;
+  z-index: 1;
+}
+
+.ornamental-empty-mark {
+  display: block;
+  width: 50px;
+  height: 28px;
+  margin-inline: auto;
+}
+
+.empty-corner-ornament {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 48px;
+  height: auto;
+  color: var(--brand-gold);
+  opacity: 0.48;
+}
+
 .hero-brand-logo {
   width: clamp(120px, 32vw, 280px);
   max-width: 100%;
@@ -244,6 +472,113 @@ h2 {
   left: 0;
 }
 
+@keyframes globe-route-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes girih-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .diplomatic-hero-art {
+    min-height: 250px;
+    border-radius: 1.5rem;
+  }
+
+  .diplomatic-hero-pattern {
+    top: -25%;
+    left: -20%;
+    width: 68%;
+  }
+
+  .diplomatic-globe {
+    width: min(72%, 280px);
+  }
+
+  .diplomatic-orbit-star {
+    top: 8%;
+    right: 4%;
+    width: 54px;
+  }
+
+  .diplomatic-hero-vine {
+    bottom: 8%;
+    left: 20%;
+    width: 54%;
+  }
+
+  .diplomatic-dove {
+    top: 12%;
+    left: 7%;
+    width: 42px;
+  }
+
+  .department-card-corner {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 56px;
+    height: auto;
+    color: var(--brand-gold);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .access-denied-panel,
+  .not-found-panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .access-denied-pattern,
+  .not-found-pattern {
+    position: absolute;
+    z-index: 0;
+    top: -34px;
+    right: -30px;
+    width: 220px;
+    height: auto;
+    color: var(--brand-blue);
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .access-denied-panel > :not(.access-denied-pattern),
+  .not-found-panel > :not(.not-found-pattern) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .access-denied-panel > .empty-corner-ornament,
+  .not-found-panel > .empty-corner-ornament {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .diplomatic-olive {
+    right: 1%;
+    bottom: 12%;
+    width: 86px;
+  }
+
+  .diplomatic-corner {
+    bottom: 12%;
+    left: 2%;
+    width: 44px;
+  }
+
+  .diplomatic-hero-caption {
+    bottom: 12px;
+    font-size: 0.65rem;
+  }
+}
+
 @media (max-width: 767px) {
   .demo-watermark {
     right: 8px;
@@ -256,6 +591,12 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .globe-route,
+  .diplomatic-orbit-star {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 
   .loading-mark {

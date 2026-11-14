@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { SectionHeading } from "@/components/section-heading";
+import { OrnamentDivider } from "@/components/ornaments";
 
 const stages = [
   {
@@ -51,6 +52,7 @@ export default function ArchitecturePage() {
           <BrandLogo className="h-12 w-auto" withPlate />
         </div>
         <h2 className="text-lg font-bold">Tizim chizmasi</h2>
+        <OrnamentDivider className="mt-3 max-w-xs text-[var(--gold)]" />
         <div className="mt-6 grid gap-3 text-center sm:grid-cols-5 sm:items-center">
           {[
             ["01", "Ommaviy portal"],
@@ -87,6 +89,7 @@ export default function ArchitecturePage() {
             <h2 className="serif-heading mt-3 text-2xl font-bold text-[var(--navy)] sm:text-3xl">
               Bosqichma-bosqich rivojlanish
             </h2>
+            <OrnamentDivider className="mt-3 max-w-xs" />
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate-600">
             Hozirgi namuna faqat taqdimot uchun. Ma’qullangandan keyin to‘liq
@@ -116,6 +119,7 @@ export default function ArchitecturePage() {
         <h2 className="serif-heading mt-3 text-2xl font-bold text-[var(--navy)] sm:text-3xl">
           Xavfsizlik tamoyillari
         </h2>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <div className="mt-6 grid gap-3 sm:grid-cols-2">
           {principles.map(([title, description], index) => (
             <article

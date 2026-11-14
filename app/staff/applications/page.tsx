@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AccessGate } from "@/components/access-gate";
-import { BrandMark } from "@/components/brand-logo";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
 import {
   demoApi,
   demoRoleProfiles,
@@ -44,6 +44,7 @@ export default function StaffApplicationsPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Arizalar
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Namuna xodim faqat Samarqand viloyatidagi o‘ziga biriktirilgan dastur
           arizalarini ko‘radi. Bu brauzerdagi ko‘rgazmali ruxsat tekshiruvi.
@@ -137,10 +138,9 @@ export default function StaffApplicationsPage() {
             );
           })}
           {!visibleApplications.length && (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-              <BrandMark className="mx-auto mb-3 h-7" />
+            <OrnamentalEmptyState className="text-sm text-slate-500">
               <p>Tanlangan mezonlarga mos ariza topilmadi.</p>
-            </div>
+            </OrnamentalEmptyState>
           )}
         </div>
       </div>

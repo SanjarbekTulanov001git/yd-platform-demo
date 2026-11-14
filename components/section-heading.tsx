@@ -1,3 +1,5 @@
+import { OrnamentDivider } from "@/components/ornaments";
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -19,8 +21,9 @@ export function SectionHeading({
       >
         {title}
       </h2>
+      <OrnamentDivider className="mt-4 max-w-xs" />
       {description && (
-        <p className={`mt-4 leading-7 ${light ? "text-white/70" : "text-slate-600"}`}>
+        <p className={`mt-4 text-base leading-7 ${light ? "text-white/70" : "text-slate-600"}`}>
           {description}
         </p>
       )}

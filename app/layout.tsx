@@ -4,6 +4,7 @@ import { BrandLogo } from "@/components/brand-logo";
 import { DemoProvider } from "@/components/demo-provider";
 import { SiteHeader } from "@/components/site-header";
 import { DemoBadge } from "@/components/demo-badge";
+import { FooterIkat } from "@/components/ornaments";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -46,6 +47,9 @@ export default function RootLayout({
           <SiteHeader />
           <main className="page-shell">{children}</main>
           <footer className="border-t border-slate-200 bg-white py-10 sm:py-12">
+            <div className="section-wrap pb-5">
+              <FooterIkat />
+            </div>
             <div className="section-wrap flex flex-col gap-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
               <div className="py-8">
                 <BrandLogo className="h-[64px] w-auto" />

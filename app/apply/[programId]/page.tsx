@@ -7,6 +7,7 @@ import { AccessGate } from "@/components/access-gate";
 import { BrandMark } from "@/components/brand-logo";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import { OrnamentDivider } from "@/components/ornaments";
 import { demoApi } from "@/lib/api";
 
 export default function ApplyPage() {
@@ -82,6 +83,7 @@ export default function ApplyPage() {
           <h1 className="fluid-title mt-3 font-bold text-[var(--navy)]">
             {program.name}
           </h1>
+          <OrnamentDivider className="mt-3 max-w-xs" />
           <p className="mt-3 leading-6 text-slate-600">
             Ariza muddati: {formatDate(program.applicationDeadline)}
           </p>

@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { BrandMark } from "@/components/brand-logo";
 import { AccessGate } from "@/components/access-gate";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
 import { demoApi, getStatusLabel, getStatusStyles } from "@/lib/api";
 
 export default function MemberCabinetPage() {
@@ -29,6 +29,7 @@ export default function MemberCabinetPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Salom, {profile.givenName} {profile.familyName}
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Bu kabinetda faqat namuna a’zoning o‘z ma’lumotlari va arizalari
           ko‘rsatiladi.
@@ -73,6 +74,7 @@ export default function MemberCabinetPage() {
                 <h2 className="mt-2 text-2xl font-bold text-[var(--navy)]">
                   Yuborilgan arizalar
                 </h2>
+                <OrnamentDivider className="mt-3 max-w-xs" />
               </div>
               <Link
                 className="brand-button rounded-xl px-4 py-3 text-sm font-bold"
@@ -132,10 +134,9 @@ export default function MemberCabinetPage() {
                   </article>
                 ))
               ) : (
-                <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-                  <BrandMark className="mx-auto mb-3 h-7" />
+                <OrnamentalEmptyState className="text-sm text-slate-500">
                   <p>Hozircha ariza yuborilmagan.</p>
-                </div>
+                </OrnamentalEmptyState>
               )}
             </div>
           </section>

@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import { BrandMark } from "@/components/brand-logo";
 import { SectionHeading } from "@/components/section-heading";
 import { formatDate } from "@/components/program-card";
+import {
+  OrnamentDivider,
+  OrnamentalEmptyState,
+} from "@/components/ornaments";
 import { demoApi } from "@/lib/api";
 
 export default function ProgramDetailPage() {
@@ -53,9 +56,10 @@ export default function ProgramDetailPage() {
             </article>
           </div>
           <div className="mt-10">
-            <h2 className="text-xl font-bold text-[var(--navy)]">
+            <h2 className="serif-heading font-bold text-[var(--navy)]">
               Dastur tadbirlari
             </h2>
+            <OrnamentDivider className="mt-3 max-w-xs" />
             <div className="mt-4 space-y-3">
               {events.length ? (
                 events.map((event) => (
@@ -71,10 +75,9 @@ export default function ProgramDetailPage() {
                   </article>
                 ))
               ) : (
-                <div className="rounded-2xl border border-dashed border-slate-300 p-5 text-sm text-slate-500">
-                  <BrandMark className="mb-3 h-7" />
+                <OrnamentalEmptyState className="text-sm text-slate-500">
                   <p>Hozircha tadbir namunasi kiritilmagan.</p>
-                </div>
+                </OrnamentalEmptyState>
               )}
             </div>
           </div>

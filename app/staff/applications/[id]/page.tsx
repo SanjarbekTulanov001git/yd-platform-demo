@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { AccessGate } from "@/components/access-gate";
-import { BrandMark } from "@/components/brand-logo";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import {
+  OrnamentDivider,
+  OrnamentalEmptyState,
+} from "@/components/ornaments";
 import {
   demoApi,
   demoRoleProfiles,
@@ -44,20 +47,22 @@ export default function StaffApplicationDetailPage() {
           ← Arizalar ro‘yxatiga qaytish
         </Link>
         {!application || !allowed ? (
-          <div className="mx-auto mt-8 max-w-xl rounded-3xl border border-rose-200 bg-white p-8 text-center">
-            <BrandMark className="mx-auto h-9" />
-            <h1 className="text-2xl font-black text-[var(--navy)]">Ruxsat yo‘q</h1>
-            <p className="mt-3 leading-6 text-slate-600">
+          <OrnamentalEmptyState className="mx-auto mt-8 max-w-xl">
+            <h1 className="fluid-title font-black text-[var(--navy)]">
+              Ruxsat yo‘q
+            </h1>
+            <p className="mt-3 text-base leading-6 text-slate-600">
               Ariza mavjud emas yoki tanlangan xodimga biriktirilmagan.
             </p>
-          </div>
+          </OrnamentalEmptyState>
         ) : (
           <div className="mt-8 grid gap-5 lg:grid-cols-[1fr_320px]">
             <article className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
               <p className="eyebrow">Namuna ariza tafsiloti</p>
-              <h1 className="mt-3 text-2xl font-bold text-[var(--navy)]">
+              <h1 className="fluid-title mt-3 font-bold text-[var(--navy)]">
                 {applicant?.givenName} {applicant?.familyName}
               </h1>
+              <OrnamentDivider className="mt-3 max-w-xs" />
               <p className="mt-2 text-sm text-slate-500">
                 {demoApi.getProgramName(application.programId)}
               </p>

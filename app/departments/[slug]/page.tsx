@@ -5,6 +5,10 @@ import { notFound, useParams } from "next/navigation";
 import { DepartmentArt } from "@/components/department-card";
 import { formatDate, ProgramCard } from "@/components/program-card";
 import { SectionHeading } from "@/components/section-heading";
+import {
+  OrnamentDivider,
+  OrnamentalEmptyState,
+} from "@/components/ornaments";
 import { demoApi } from "@/lib/api";
 
 export default function DepartmentDetailPage() {
@@ -50,9 +54,10 @@ export default function DepartmentDetailPage() {
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <p className="eyebrow">Asosiy yo‘nalishlar</p>
-            <h2 className="mt-3 text-2xl font-bold text-[var(--navy)]">
+            <h2 className="serif-heading mt-3 font-bold text-[var(--navy)]">
               Nimalar amalga oshiriladi?
             </h2>
+            <OrnamentDivider className="mt-3 max-w-xs" />
             <ul className="mt-6 space-y-3">
               {department.directions.map((direction) => (
                 <li
@@ -69,9 +74,10 @@ export default function DepartmentDetailPage() {
           </div>
           <div>
             <p className="eyebrow">Uchrashuvlar</p>
-            <h2 className="mt-3 text-2xl font-bold text-[var(--navy)]">
+            <h2 className="serif-heading mt-3 font-bold text-[var(--navy)]">
               Yaqin tadbirlar
             </h2>
+            <OrnamentDivider className="mt-3 max-w-xs" />
             {relatedEvents.length ? (
               <div className="mt-6 space-y-3">
                 {relatedEvents.map((event) => (
@@ -87,9 +93,9 @@ export default function DepartmentDetailPage() {
                 ))}
               </div>
             ) : (
-              <p className="mt-5 rounded-xl border border-dashed border-slate-300 p-5 text-sm text-slate-500">
+              <OrnamentalEmptyState className="mt-5 text-sm text-slate-500">
                 Bu bo‘lim uchun tadbir namunasi kiritilmagan.
-              </p>
+              </OrnamentalEmptyState>
             )}
           </div>
         </div>
@@ -99,9 +105,10 @@ export default function DepartmentDetailPage() {
         <section className="bg-white py-12 sm:py-16">
           <div className="section-wrap">
             <p className="eyebrow">Ta’lim va amaliyot</p>
-            <h2 className="mt-3 text-2xl font-bold text-[var(--navy)]">
+            <h2 className="serif-heading mt-3 font-bold text-[var(--navy)]">
               Ushbu bo‘lim dasturlari
             </h2>
+            <OrnamentDivider className="mt-3 max-w-xs" />
             <div className="mt-6 grid gap-5 md:grid-cols-3">
               {relatedPrograms.map((program) => (
                 <ProgramCard key={program.id} program={program} />

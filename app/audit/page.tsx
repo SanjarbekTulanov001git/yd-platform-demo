@@ -1,9 +1,9 @@
 "use client";
 
 import { AccessGate } from "@/components/access-gate";
-import { BrandMark } from "@/components/brand-logo";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
+import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
 import { demoApi, demoRoleProfiles } from "@/lib/api";
 
 export default function AuditPage() {
@@ -39,6 +39,7 @@ export default function AuditPage() {
         <h1 className="serif-heading mt-3 text-3xl font-bold text-[var(--navy)] sm:text-4xl">
           Audit jurnali
         </h1>
+        <OrnamentDivider className="mt-3 max-w-xs" />
         <p className="mt-3 max-w-2xl leading-7 text-slate-600">
           Bu namuna jurnalida amal, foydalanuvchi va vaqt ko‘rsatiladi. Haqiqiy
           tizimda bunday jurnalni brauzer foydalanuvchisi o‘zgartira olmaydi.
@@ -73,10 +74,9 @@ export default function AuditPage() {
               </article>
             ))
           ) : (
-            <div className="p-8 text-center text-sm text-slate-500">
-              <BrandMark className="mx-auto mb-3 h-7" />
+            <OrnamentalEmptyState className="m-4 text-sm text-slate-500">
               <p>Tanlangan rol uchun audit yozuvi topilmadi.</p>
-            </div>
+            </OrnamentalEmptyState>
           )}
         </div>
       </div>
