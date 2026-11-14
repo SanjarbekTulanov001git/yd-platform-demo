@@ -3,10 +3,12 @@
 import { useEffect } from "react";
 import { divIcon } from "leaflet";
 import {
+  AttributionControl,
   MapContainer,
   Marker,
   Popup,
   TileLayer,
+  ZoomControl,
   useMap,
 } from "react-leaflet";
 import type { Institution, Region } from "@/types";
@@ -50,11 +52,19 @@ export default function LeafletMap({
       center={mapCenter}
       zoom={zoom}
       scrollWheelZoom={false}
+      zoomControl={false}
+      attributionControl={false}
       className="demo-map h-[420px] w-full rounded-2xl sm:h-[500px]"
     >
       <MapCenter center={mapCenter} zoom={zoom} />
+      <ZoomControl
+        position="topright"
+        zoomInTitle="Kattalashtirish"
+        zoomOutTitle="Kichraytirish"
+      />
+      <AttributionControl prefix="Xarita vositasi: Leaflet" />
       <TileLayer
-        attribution='Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+        attribution="Xarita tasvirlari © Esri; manbalar: Esri, Maxar, Earthstar Geographics va GIS User Community"
         url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
       />
       {institutions.map((institution) => (

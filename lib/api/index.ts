@@ -68,6 +68,42 @@ function makeId(prefix: string): string {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
+const reportMonthNames = [
+  "Yanvar",
+  "Fevral",
+  "Mart",
+  "Aprel",
+  "May",
+  "Iyun",
+  "Iyul",
+  "Avgust",
+  "Sentyabr",
+  "Oktyabr",
+  "Noyabr",
+  "Dekabr",
+];
+
+function getReportRanges(period: ReportFilter["period"]) {
+  if (period === "week") {
+    return Array.from({ length: 4 }, (_, index) => {
+      const end = new Date(Date.UTC(2026, 10, 13 - (3 - index) * 7));
+      const start = new Date(end);
+      start.setUTCDate(end.getUTCDate() - 6);
+      return {
+        label: `${start.getUTCDate()} ${reportMonthNames[start.getUTCMonth()]}–${end.getUTCDate()} ${reportMonthNames[end.getUTCMonth()]}`,
+        start,
+        end: new Date(end.getTime() + 86_400_000),
+      };
+    });
+  }
+
+  return reportMonthNames.slice(6).map((label, index) => ({
+    label,
+    start: new Date(Date.UTC(2026, index + 6, 1)),
+    end: new Date(Date.UTC(2026, index + 7, 1)),
+  }));
+}
+
 export const demoApi = {
   getDepartments(): Department[] {
     return departments;
@@ -371,13 +407,30 @@ export const demoApi = {
     return demoUsers.find((user) => user.id === MEMBER_DEMO_USER_ID);
   },
 
-  getReports(regionId: ReportFilter["regionId"], programId: ReportFilter["programId"]) {
+  getReports(
+    regionId: ReportFilter["regionId"],
+    programId: ReportFilter["programId"],
+    period: ReportFilter["period"] = "month",
+  ) {
     const visibleApplications = this.getApplications().filter((application) => {
       const regionMatches = regionId === "all" || application.regionId === regionId;
       const programMatches =
         programId === "all" || application.programId === programId;
       return regionMatches && programMatches;
     });
+    const reportRanges = getReportRanges(period);
+    const rangeStart = reportRanges[0]?.start.getTime() ?? Number.NEGATIVE_INFINITY;
+    const rangeEnd =
+      reportRanges[reportRanges.length - 1]?.end.getTime() ??
+      Number.POSITIVE_INFINITY;
+    const periodProgramIds = new Set(
+      visibleApplications
+        .filter((application) => {
+          const submittedAt = new Date(application.submittedAt).getTime();
+          return submittedAt >= rangeStart && submittedAt < rangeEnd;
+        })
+        .map((application) => application.programId),
+    );
     const visibleVisits = visits.filter((visit) => {
       if (regionId === "all") return true;
       const institution = institutions.find(
@@ -392,44 +445,19 @@ export const demoApi = {
       acceptedApplications: visibleApplications.filter(
         (application) => application.status === "accepted",
       ).length,
-      activePrograms: programs.filter((program) => program.status === "open")
-        .length,
+      activePrograms: programs.filter(
+        (program) =>
+          program.status === "open" &&
+          (regionId === "all" || program.regionIds.includes(regionId)) &&
+          (programId === "all" || program.id === programId) &&
+          periodProgramIds.has(program.id),
+      ).length,
     };
   },
 
   getReportTimeline(filter: ReportFilter): ReportSummary[] {
     const base = this.getReports(filter.regionId, filter.programId);
-    const monthNames = [
-      "Yanvar",
-      "Fevral",
-      "Mart",
-      "Aprel",
-      "May",
-      "Iyun",
-      "Iyul",
-      "Avgust",
-      "Sentyabr",
-      "Oktyabr",
-      "Noyabr",
-      "Dekabr",
-    ];
-    const ranges =
-      filter.period === "week"
-        ? Array.from({ length: 4 }, (_, index) => {
-            const end = new Date(Date.UTC(2026, 10, 13 - (3 - index) * 7));
-            const start = new Date(end);
-            start.setUTCDate(end.getUTCDate() - 6);
-            return {
-              label: `${start.getUTCDate()} ${monthNames[start.getUTCMonth()]}–${end.getUTCDate()} ${monthNames[end.getUTCMonth()]}`,
-              start,
-              end: new Date(end.getTime() + 86_400_000),
-            };
-          })
-        : monthNames.slice(6).map((label, index) => ({
-            label,
-            start: new Date(Date.UTC(2026, index + 6, 1)),
-            end: new Date(Date.UTC(2026, index + 7, 1)),
-          }));
+    const ranges = getReportRanges(filter.period);
 
     return ranges.map(({ label, start, end }) => {
       const inRange = (value: string) => {

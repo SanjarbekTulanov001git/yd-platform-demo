@@ -36,13 +36,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-svg {
-  max-width: 100%;
+  svg {
+    max-width: 100%;
+  }
 }
 
 button,
@@ -83,6 +85,71 @@ textarea:focus-visible {
 
 .section-wrap > * {
   min-width: 0;
+}
+
+.filter-panel {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.filter-panel-toggle {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  color: var(--navy);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 800;
+  list-style: none;
+}
+
+.filter-panel-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.filter-panel-toggle:focus-visible {
+  outline: 3px solid rgba(0, 91, 168, 0.55);
+  outline-offset: -3px;
+}
+
+.filter-panel-chevron {
+  color: var(--brand-blue);
+  transition: transform 150ms ease;
+}
+
+.filter-panel[open] .filter-panel-chevron {
+  transform: rotate(180deg);
+}
+
+.filter-panel-content {
+  border-top: 1px solid var(--line);
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .filter-panel {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .filter-panel-toggle {
+    display: none;
+  }
+
+  .filter-panel:not([open]) > .filter-panel-content {
+    display: block;
+  }
+
+  .filter-panel-content {
+    border-top: 0;
+    padding: 0;
+  }
 }
 
 .eyebrow {
@@ -585,6 +652,12 @@ h2 {
     bottom: 8px;
     padding: 7px 10px;
     font-size: 0.64rem;
+  }
+
+  .demo-map .leaflet-control-attribution {
+    max-width: calc(100% - 12px);
+    margin-bottom: 44px;
+    white-space: normal;
   }
 }
 

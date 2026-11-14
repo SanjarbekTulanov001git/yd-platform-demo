@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { AccessGate } from "@/components/access-gate";
+import { FilterPanel } from "@/components/filter-panel";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
 import { OrnamentDivider, OrnamentalEmptyState } from "@/components/ornaments";
@@ -50,59 +51,61 @@ export default function StaffApplicationsPage() {
           arizalarini ko‘radi. Bu brauzerdagi ko‘rgazmali ruxsat tekshiruvi.
         </p>
 
-        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-          <div className="grid gap-3 sm:grid-cols-3">
-            <label className="text-xs font-bold text-slate-600">
-              Dastur
-              <select
-                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
-                onChange={(event) => setProgramFilter(event.target.value)}
-                value={programFilter}
-              >
-                <option value="all">Barcha biriktirilgan dasturlar</option>
-                {availablePrograms.map((program) => (
-                  <option value={program.id} key={program.id}>
-                    {program.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="text-xs font-bold text-slate-600">
-              Ariza holati
-              <select
-                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
-                onChange={(event) => setStatusFilter(event.target.value)}
-                value={statusFilter}
-              >
-                <option value="all">Barcha holatlar</option>
-                {(["submitted", "reviewing", "accepted", "rejected"] as ApplicationStatus[]).map(
-                  (status) => (
+        <div className="mt-8">
+          <FilterPanel>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <label className="text-xs font-bold text-slate-600">
+                Dastur
+                <select
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
+                  onChange={(event) => setProgramFilter(event.target.value)}
+                  value={programFilter}
+                >
+                  <option value="all">Barcha biriktirilgan dasturlar</option>
+                  {availablePrograms.map((program) => (
+                    <option value={program.id} key={program.id}>
+                      {program.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-xs font-bold text-slate-600">
+                Ariza holati
+                <select
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
+                  onChange={(event) => setStatusFilter(event.target.value)}
+                  value={statusFilter}
+                >
+                  <option value="all">Barcha holatlar</option>
+                  {(
+                    ["submitted", "reviewing", "accepted", "rejected"] as ApplicationStatus[]
+                  ).map((status) => (
                     <option value={status} key={status}>
                       {getStatusLabel(status)}
                     </option>
-                  ),
-                )}
-              </select>
-            </label>
-            <label className="text-xs font-bold text-slate-600">
-              Hudud
-              <select
-                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
-                onChange={(event) => setRegionFilter(event.target.value)}
-                value={regionFilter}
-              >
-                <option value="all">Barcha vakolatli hududlar</option>
-                {demoApi
-                  .getRegions()
-                  .filter((region) => region.id === scopedRegion)
-                  .map((region) => (
-                    <option value={region.id} key={region.id}>
-                      {region.name}
-                    </option>
                   ))}
-              </select>
-            </label>
-          </div>
+                </select>
+              </label>
+              <label className="text-xs font-bold text-slate-600">
+                Hudud
+                <select
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
+                  onChange={(event) => setRegionFilter(event.target.value)}
+                  value={regionFilter}
+                >
+                  <option value="all">Barcha vakolatli hududlar</option>
+                  {demoApi
+                    .getRegions()
+                    .filter((region) => region.id === scopedRegion)
+                    .map((region) => (
+                      <option value={region.id} key={region.id}>
+                        {region.name}
+                      </option>
+                    ))}
+                </select>
+              </label>
+            </div>
+          </FilterPanel>
           <p className="mt-3 text-xs text-slate-500">
             Ko‘rsatilgan arizalar: {visibleApplications.length}
           </p>

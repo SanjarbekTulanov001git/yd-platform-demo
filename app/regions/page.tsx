@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AccessGate } from "@/components/access-gate";
+import { FilterPanel } from "@/components/filter-panel";
 import { MapView } from "@/components/map/map-view";
 import { useDemo } from "@/components/demo-provider";
 import { formatDate } from "@/components/program-card";
@@ -10,21 +11,28 @@ import { demoApi, demoRoleProfiles } from "@/lib/api";
 
 export default function RegionsPage() {
   const { role, changeKey, notifyChange } = useDemo();
-  const [regionFilter, setRegionFilter] = useState("all");
+  const roleProfile = demoRoleProfiles[role];
+  const assignedRegionId = role === "staff" ? roleProfile.regionId : undefined;
+  const [regionFilter, setRegionFilter] = useState(
+    role === "staff" ? roleProfile.regionId ?? "all" : "all",
+  );
   const regions = demoApi.getRegions();
-  const institutions = demoApi
-    .getInstitutions()
-    .filter(
-      (institution) =>
-        regionFilter === "all" || institution.regionId === regionFilter,
-    );
+  const effectiveRegionId =
+    regionFilter === "all" ? assignedRegionId : regionFilter;
+  const outsideAssignedRegion =
+    Boolean(assignedRegionId) && effectiveRegionId !== assignedRegionId;
+  const institutions = outsideAssignedRegion
+    ? []
+    : demoApi.getInstitutions().filter(
+        (institution) =>
+          !effectiveRegionId || institution.regionId === effectiveRegionId,
+      );
   const visibleInstitutionIds = new Set(
     institutions.map((institution) => institution.id),
   );
   const visits = demoApi
     .getVisits()
     .filter((visit) => visibleInstitutionIds.has(visit.institutionId));
-  const roleProfile = demoRoleProfiles[role];
 
   return (
     <AccessGate screen="/regions">
@@ -39,39 +47,54 @@ export default function RegionsPage() {
           Hududni almashtirish uchun alohida tizim kerak emas.
         </p>
 
-        <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-          <label className="block max-w-sm text-xs font-bold text-slate-600">
-            Hududni tanlang
-            <select
-              className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
-              onChange={(event) => setRegionFilter(event.target.value)}
-              value={regionFilter}
-            >
-              <option value="all">Barcha hududlar</option>
-              {regions.map((region) => (
-                <option value={region.id} key={region.id}>
-                  {region.name}
+        <div className="mt-8">
+          <FilterPanel>
+            <label className="block max-w-sm text-xs font-bold text-slate-600">
+              Hududni tanlang
+              <select
+                className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-sm font-medium text-slate-800"
+                onChange={(event) => setRegionFilter(event.target.value)}
+                value={regionFilter}
+              >
+                <option value="all">
+                  {role === "staff" ? "Biriktirilgan hudud" : "Barcha hududlar"}
                 </option>
-              ))}
-            </select>
-          </label>
-          <div className="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-slate-600">
-            <span className="inline-flex items-center gap-2">
-              <span className="size-3 rounded-full bg-emerald-600" />
-              Koordinata tasdiqlangan
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="size-3 rounded-full bg-amber-500" />
-              Tekshiruv kutilmoqda
-            </span>
-          </div>
+                {regions.map((region) => (
+                  <option value={region.id} key={region.id}>
+                    {region.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-slate-600">
+              <span className="inline-flex items-center gap-2">
+                <span className="size-3 rounded-full bg-[var(--brand-blue)]" />
+                Koordinata tasdiqlangan
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="size-3 rounded-full bg-amber-500" />
+                Tekshiruv kutilmoqda
+              </span>
+            </div>
+          </FilterPanel>
         </div>
+
+        {outsideAssignedRegion && (
+          <p
+            className="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900"
+            role="status"
+          >
+            Xodim roli faqat {demoApi.getRegionName(assignedRegionId ?? "")} hududiga
+            biriktirilgan. Boshqa hududlarning muassasa va tashriflari
+            ko‘rsatilmaydi.
+          </p>
+        )}
 
         <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2">
           <MapView
             institutions={institutions}
             regions={regions}
-            selectedRegionId={regionFilter === "all" ? undefined : regionFilter}
+            selectedRegionId={effectiveRegionId}
             onApprove={(institutionId) => {
               const saved = demoApi.approveLocation(
                 institutionId,

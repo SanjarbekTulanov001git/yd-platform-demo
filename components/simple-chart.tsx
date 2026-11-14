@@ -6,7 +6,7 @@ export interface ChartPoint {
 export function SimpleBarChart({
   title,
   points,
-  color = "#c99a3b",
+  color = "var(--brand-blue)",
 }: {
   title: string;
   points: ChartPoint[];
